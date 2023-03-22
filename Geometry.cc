@@ -31,6 +31,7 @@
 #include "CalorimeterSD.hh"
 #include "G4Material.hh"
 #include "G4NistManager.hh"
+#include "G4RotationMatrix.hh"
 
 #include "G4Box.hh" 
 #include "G4LogicalVolume.hh"
@@ -229,6 +230,42 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
                  kYAxis,           // axis of replication
                  fNofSlab,        // number of replica
                  SlabWidth);  // witdth of replica
+
+/// Panel2
+  auto Panel2
+    = new G4Box("Panel2",
+                SlabLength/2, TotalWidth/2, SlabThickness);
+    
+    auto Panel2LV
+    = new G4LogicalVolume(
+                 Panel2,
+//                 layerS,           // its solid
+                 defaultMaterial,  // its material
+                 "Panel2");         // its name
+
+  
+  G4RotationMatrix* r = new G4RotationMatrix;
+  r ->rotateZ(M_PI/2.*rad);  
+    
+  new G4PVPlacement(r,  // no rotation
+    G4ThreeVector(0,0,(gapThickness+SlabThickness)/2),          // at (0,0,0)
+    Panel2LV,                  // its logical volume
+    "Panel2",            // its name
+    worldLV,                  // its mother  volume
+    false,                    // no boolean operation
+    0,                        // copy number
+    fCheckOverlaps); 
+  
+
+  new G4PVReplica(
+                 "Panel2",          // its name
+                 SlabLV,          // its logical volume
+                 Panel2LV,          // its mother
+                 kYAxis,           // axis of replication
+                 fNofSlab,        // number of replica
+                 SlabWidth);  // witdth of replica
+    
+  
 
   // Gap
   //
