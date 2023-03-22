@@ -74,12 +74,19 @@ void DetectorConstruction::DefineMaterials()
   auto nistManager = G4NistManager::Instance();
   nistManager->FindOrBuildMaterial("G4_Pb");
 
-  // Liquid argon material
- /* G4double a;  // mass of a mole;
-  G4double z;  // z=mean number of protons;Scintillator
-  G4double density;
-  new G4Material("liquidArgon", z=18., a= 39.95*g/mole, density= 1.390*g/cm3);
-         // The argon by NIST Manager is a gas with a different density
+  // Air
+  G4double z,a,fractionmass,density;  // mass of a mole z=mean number of protons;Scintillator
+  G4String name, symbol;
+  G4int ncomponents;
+  a = 14.01*g/mole;
+  G4Element*e1N = new G4Element(name="Nitrogen",symbol="N",z=7.,a);
+  a =16.00*g/mole;
+  G4Element*e1O = new G4Element(name="Oxygen",symbol="O",z=8.,a);
+  density = 1.290*mg/cm3;
+  G4Material*Air = new G4Material(name="Air", density, ncomponents=2);
+  Air -> AddElement(e1N, fractionmass=70*perCent);
+  Air -> AddElement(e1O, fractionmass=30*perCent);
+        
 
   // Vacuum
   new G4Material("Galactic", z=1., a=1.01*g/mole,density= universe_mean_density,
@@ -87,7 +94,7 @@ void DetectorConstruction::DefineMaterials()
 
   // Print materials
   G4cout << *(G4Material::GetMaterialTable()) << G4endl;
-  */
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -119,7 +126,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   // Get materials
   auto defaultMaterial = G4Material::GetMaterial("Galactic");
   auto absorberMaterial = G4Material::GetMaterial("G4_ANTHRACENE");
-  auto gapMaterial = G4Material::GetMaterial("G4_AIR");
+  auto gapMaterial = G4Material::GetMaterial("Air");
 
   if ( ! defaultMaterial || ! absorberMaterial || ! gapMaterial ) {
     G4ExceptionDescription msg;
