@@ -75,7 +75,7 @@ void DetectorConstruction::DefineMaterials()
   nistManager->FindOrBuildMaterial("G4_Pb");
 
   // Liquid argon material
-  G4double a;  // mass of a mole;
+ /* G4double a;  // mass of a mole;
   G4double z;  // z=mean number of protons;Scintillator
   G4double density;
   new G4Material("liquidArgon", z=18., a= 39.95*g/mole, density= 1.390*g/cm3);
@@ -87,6 +87,7 @@ void DetectorConstruction::DefineMaterials()
 
   // Print materials
   G4cout << *(G4Material::GetMaterialTable()) << G4endl;
+  */
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -117,8 +118,8 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
 
   // Get materials
   auto defaultMaterial = G4Material::GetMaterial("Galactic");
-  auto absorberMaterial = G4Material::GetMaterial("G4_Pb");
-  auto gapMaterial = G4Material::GetMaterial("liquidArgon");
+  auto absorberMaterial = G4Material::GetMaterial("G4_ANTHRACENE");
+  auto gapMaterial = G4Material::GetMaterial("G4_AIR");
 
   if ( ! defaultMaterial || ! absorberMaterial || ! gapMaterial ) {
     G4ExceptionDescription msg;
@@ -194,7 +195,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     = new G4LogicalVolume(
                  Slab,
 //                 SLabS,           // its solid
-                 defaultMaterial,  // its material
+                 absorberMaterial,  // its material
                  "Slab");         // its name
 
   //
