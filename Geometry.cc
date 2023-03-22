@@ -184,8 +184,8 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   //Slab
   //
 
-  auto layerScintillator
-    = new G4Box("Layer",
+  auto Slab
+    = new G4Box("Slab",
                 SlabLength/2, SlabWidth/2, SlabThickness);
 
 //  auto layerLV
