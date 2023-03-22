@@ -188,16 +188,16 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     = new G4Box("Slab",
                 SlabLength/2, SlabWidth/2, SlabThickness);
 
-//  auto layerLV
-    auto layerScintillatorLV
+//  auto SlabLV
+    auto SlabLV
     = new G4LogicalVolume(
-                 layerScintillator,
-//                 layerS,           // its solid
+                 Slab,
+//                 SLabS,           // its solid
                  defaultMaterial,  // its material
-                 "Layer");         // its name
+                 "Slab");         // its name
 
   //
-  //Panel1
+  //Scintillator 1
   //
   auto Panel1
     = new G4Box("Panel1",
@@ -206,16 +206,16 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
 
     auto Panel1LV
     = new G4LogicalVolume(
-                 Panel1,
+                 Scintillator,
 //                 layerS,           // its solid
                  defaultMaterial,  // its material
-                 "Panel1");         // its name
+                 "Scintillator");         // its name
 
     
   new G4PVPlacement(nullptr,  // no rotation
     G4ThreeVector(),          // at (0,0,0)
-    Panel1LV,                  // its logical volume
-    "Panel1",            // its name
+    ScintillatorLV,                  // its logical volume
+    "Scintillator",            // its name
     worldLV,                  // its mother  volume
     false,                    // no boolean operation
     0,                        // copy number
@@ -225,7 +225,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   new G4PVReplica(
                  "Scintillator",          // its name
                  layerScintillatorLV,          // its logical volume
-                 Panel1LV,          // its mother
+                 ScintillatorLV,          // its mother
                  kYAxis,           // axis of replication
                  fNofSlab,        // number of replica
                  SlabWidth);  // witdth of replica
