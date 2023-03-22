@@ -32,7 +32,7 @@
 #include "G4Material.hh"
 #include "G4NistManager.hh"
 
-#include "G4Box.hh"Scintillator 
+#include "G4Box.hh" 
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 #include "G4PVReplica.hh"
@@ -209,7 +209,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
                  Panel1,
 //                 layerS,           // its solid
                  defaultMaterial,  // its material
-                 "Panel1);         // its name
+                 "Panel1");         // its name
 
     
   new G4PVPlacement(nullptr,  // no rotation
@@ -303,7 +303,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
 
   auto simpleBoxVisAtt= new G4VisAttributes(G4Colour(1.0,1.0,1.0));
   simpleBoxVisAtt->SetVisibility(true);
-  layerScintillatorLV->SetVisAttributes(simpleBoxVisAtt);
+  SlabLV->SetVisAttributes(simpleBoxVisAtt);
 
   //
   // Always return the physical World
