@@ -32,7 +32,7 @@
 #include "G4Material.hh"
 #include "G4NistManager.hh"
 
-#include "G4Box.hh"
+#include "G4Box.hh"Scintillator 
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 #include "G4PVReplica.hh"
@@ -197,7 +197,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
                  "Slab");         // its name
 
   //
-  //Scintillator 1
+  //Panel1
   //
   auto Panel1
     = new G4Box("Panel1",
