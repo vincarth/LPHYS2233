@@ -189,11 +189,11 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
                 SlabLength/2, SlabWidth/2, SlabThickness);
 
 //  auto layerLV
-    auto layerScintillatorLV
+    auto SlabLV
     = new G4LogicalVolume(
-                 layerScintillator,
+                 Slab,
 //                 layerS,           // its solid
-                 defaultMaterial,  // its material
+                 defaultMaterial,  // its material //A CHANGER
                  "Layer");         // its name
 
   //
